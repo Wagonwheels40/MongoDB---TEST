@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards</title>
+</head>
+<body>
+    <h1>Data from MongoDB Collection</h1>
+    <button onclick="fetchData()">Fetch Data</button>
+    <ul id="data-list"></ul>
+
+    <script>
+        const mongodbUrl = 'mongodb url;
+        const collectionName = '1';
+
+        async function fetchData() {
+            try {
+                const response = await fetch(mongodbUrl + '/' + collectionName);
+                const data = await response.json();
+                displayData(data);
+            } catch (error) {
+                console.log('Error:', error);
+            }
+        }
+
+        function displayData(data) {
+            const dataList = document.getElementById('data-list');
+            dataList.innerHTML = ''; // Clear previous data
+            data.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = JSON.stringify(item);
+                dataList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+<!-- MongoDB url not working -->
